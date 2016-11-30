@@ -1,11 +1,12 @@
 from apiclient.discovery import build
 from bs4 import BeautifulSoup
+from keys import developerKey
 
 class Activity:
 
-    def __init__(self, fileId, sequence=False, order=0):
+    def __init__(self, fileId, developerKey,sequence=False, order=0):
         #change this to oauth later? ask for developer key at init
-        self.drive_service = build('drive', 'v3', developerKey='AIzaSyCGGk6qV_5YjZTltE9B56Or49lmlOv-HoQ')
+        self.drive_service = build('drive', 'v3', developerKey=developerKey)
         html = self.get_html(fileId)
         self.soup = BeautifulSoup(html, 'html.parser')
         if sequence != False:
@@ -57,7 +58,7 @@ class Activity:
         return "not parsing"
 
 
-activity = Activity("1J2n_XgsojFU2GuwHv8UUQvniKVO74r8fyke0RAU38jk")
+activity = Activity("1J2n_XgsojFU2GuwHv8UUQvniKVO74r8fyke0RAU38jk", developerKey)
 print activity.soup.prettify()
 
 
